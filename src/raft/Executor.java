@@ -79,8 +79,9 @@ public class Executor extends Thread {
     private Command getNextCommand() throws InterruptedException {
         int timeout;
         if (sInfo.getServerState() != ServerState.LEADER) {
-            timeout = sInfo.timeout;;
-        } else {
+            timeout = sInfo.timeout;
+			timeout += new Random().nextInt(timeout);
+			} else {
             timeout = sInfo.timeout / 2;
         }
         while (true) {
